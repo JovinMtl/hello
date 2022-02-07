@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 
 from .models import treso, Main, Produit, Charge
+from .forms import userForm, prod
 # from frozen.models import Boss
 
 # Create your views here.
@@ -167,3 +168,24 @@ def entrer(request):
 def disconnect(request):
 	logout(request)
 	return redirect('/')
+
+def register(request):
+	if request.POST:
+		print("Vous avez envoyé donnee")
+		izina = request.POST['izina']
+		email = request.POST['email']
+		password = request.POST['password']
+
+		if not authenticate(username = izina ,password = password):
+			User.objects.create_user(username = izina, email= email,
+			password = password)
+			print("New user : ", izina )
+			return redirect('/')
+		else:
+
+			print("Vous possediez deja un compte ")
+	else:
+		print("Vous n'avez pas envoyé donnee")
+		return render(request, 'register.html')
+
+	return render(request, 'register.html')

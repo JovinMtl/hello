@@ -12,4 +12,5 @@ urlpatterns = [
 	path('login/', views.entrer, name = 'login'),
 	path('connect/', views.connect, name = 'connect'),
 	path('disconnect/', views.disconnect, name = 'disconnect'),
+	path('register/', views.register, name = 'register'),
 ]

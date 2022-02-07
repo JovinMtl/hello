@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registration</title>
+</head>
+<body>
+	<form method="POST" action="/register/">
+		{% csrf_token %}
+		<input type="text" name="izina" placeholder="Andika Izina Ryawe"><br>
+		<input type="email" name="email" placeholder="Andika Emeyili yawe"><br>
+		<input type="password" name="password" placeholder="Andika Ijambo Kabanga"><br>
+		<button type="submit">KURUNGIKA</button>
+	</form>
+
+</body>
+</html>
