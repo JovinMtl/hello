@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home</title>
+</head>
+<body>
+	<div>
+		<a href="#Produit">PRoduits</a>
+		<a href="/connect/">LOGIN</a>
+		<a href="/disconnect">LOGOUT</a>
+		{{ dep.owner }}
+	</div>
+Bienvenue cher Gerant {% if dep.amount %} avec le capital initial de
+{{ dep.amount }}
+{% endif %}
+<br>
+{% if not dep.amount %}
+<form action="init"> 
+<input type="text" name="seed" value="your capital"> 
+<input type="submit" name="submit" ><br>
+</form> 
+{% endif %}
+
+<form action="/minus/"> 
+	<input type="text" name="motif_charge" placeholder="Motif">
+	<input type="text" name="charge" placeholder="Entrez vos depenses">
+	<button type="submit">---</button>
+</form> 
+
+ <br>
+
+<form action="/plus/">
+	<input type="text" name="motif_produit" placeholder="Motif">
+	<input type="text" name="produit" placeholder="Entrez vos produits">
+	<button type="submit">+++</button>
+</form>
+<div>
+	<h2>VOS OPERATIONS</h2>
+	
+	<div id="Charge">
+		<p>==========================</p>
+		<br><br>
+		<h3>1. Vos CHARGES</h3>
+		{% for charges in dep.depe %}
+			<table>
+				<tr>
+			
+					<th>Amount: {{ charges.amount }} </th>
+					<th>Description: {{ charges.desc }} </th>
+					<th>Owner: {{ charges.owner }}</th>
+					<th><form action="/dele/"> 
+					{% if charges.owner == dep.owner %} 
+					<button type="submit" name="dep" value=" {{ charges.id }} ">supprimer</button> 
+					{% endif %}
+					</form></th>
+					<td></td><td></td>
+				</tr>
+			</table>
+		{% endfor %}
+	</div>
+	<td></td><td></td>
+	<div id="Produit">
+		<br><br>
+		<p>==========================</p>
+		<br><br>
+		<h3>2. Vos PRODUITS</h3>
+		{% for prod in dep.prod %}
+			<table>
+				<tr>
+			
+					<th>Amount: {{ prod.amount }} </th>
+					<th>Description: {{ prod.desc }} </th>
+					<th>Owner: {{ prod.owner }}</th>
+					{% if prod.owner == dep.owner %}
+					<th><form action="/dele/">  
+					<button type="submit" name="pro" value=" {{ prod.id }} ">supprimer</button>
+					{% endif %}
+				</form>
+			</th>
+			<td></td><td></td>
+		</tr>
+	</table>
+	{% endfor %}
+	</div>
+</div>
+<style type="text/css">
+	#Charge, #Produit{
+			display: inline-block;
+	}
+</style>
+</body>
+</html>
